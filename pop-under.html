@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head> </head>
+  <body>
+    <button id="button-click" onclick="openInNewTab()">Submit</button>
+  </body>
+  <script>
+    // example of popping under (jQuery)
+    document
+      .querySelector("#button-click")
+      .addEventListener("click", function (e) {
+        e.preventDefault();
+
+        function openInNewTab() {
+          window.onbeforeunload = null;
+          var newTab = "https://google.com";
+          var win = window.open(newTab, "_blank");
+          // open offer in new tab
+          win.focus();
+          // redirect current page to t2 after offer clicked
+          setTimeout(function () {
+            location.href = "https://rightfullabs.com";
+          }, 130);
+        }
+
+        openInNewTab();
+      });
+  </script>
+</html>
