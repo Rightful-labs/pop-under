@@ -1,29 +1,116 @@
 <!DOCTYPE html>
 <html>
-  <head> </head>
+  <head>
+    <title>POP Under Example</title>
+    <style>
+      * {
+        margin: auto;
+        text-align: center;
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      }
+      button {
+        cursor: pointer;
+      }
+      #form_submit,
+      #pop_under {
+        padding: 1rem;
+        border: 0.5rem solid #4848e7;
+        margin: 1rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 0 0.3rem #cdcece;
+        background-color: #4848e7;
+        color: #fefefe;
+        font-size: 1.2rem;
+        font-weight: 500;
+      }
+      #pop_under_cancel {
+        padding: 1rem;
+        border: 0.5rem solid #ffffff;
+        margin: 1rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 0 0.3rem #a1a1a1;
+        background-color: #ffffff;
+        color: #000000;
+        font-size: 1.2rem;
+        font-weight: 500;
+      }
+      .loading_submit_response,
+      .pop_under_desc {
+        display: flex;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        margin-top: 2rem;
+        padding: 2rem;
+        width: 100%;
+        border-radius: 0.5rem;
+        height: 300px;
+        background-color: #19ac7b;
+        color: #fefefe;
+        font-size: 2rem;
+        font-weight: 500;
+      }
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
   <body>
-    <button id="button-click" onclick="openInNewTab()">Submit</button>
+    <button id="form_submit">Form Submit</button>
+    <div class="loading_submit_response desc hidden">
+      Loading form submit response...
+    </div>
+    <div class="asking_user_for_pop_under_form hidden">
+      <div class="pop_under_desc desc">Asking user for pop under form...</div>
+      <button id="pop_under">Pop Under</button>
+      <button id="pop_under_cancel">Cancel</button>
+    </div>
   </body>
   <script>
     // example of popping under (jQuery)
-    document
-      .querySelector("#button-click")
-      .addEventListener("click", function (e) {
-        e.preventDefault();
+    const submitButton = document.querySelector("#form_submit");
+    const pop_under = document.querySelector("#pop_under");
+    const pop_under_cancel = document.querySelector("#pop_under_cancel");
+    const loading_submit_response = document.querySelector(
+      ".loading_submit_response"
+    );
+    const asking_user_for_pop_under_form = document.querySelector(
+      ".asking_user_for_pop_under_form"
+    );
 
-        function openInNewTab() {
-          window.onbeforeunload = null;
-          var newTab = "https://google.com";
-          var win = window.open(newTab, "_blank");
-          // open offer in new tab
-          win.focus();
-          // redirect current page to t2 after offer clicked
-          setTimeout(function () {
-            location.href = "https://rightfullabs.com";
-          }, 130);
-        }
+    submitButton.addEventListener("click", function (e) {
+      e.preventDefault();
+      submitButton.classList.add("hidden");
+      loading_submit_response.classList.remove("hidden");
+      setTimeout(() => {
+        loading_submit_response.classList.add("hidden");
+        asking_user_for_pop_under_form.classList.remove("hidden");
+      }, 5000);
 
-        openInNewTab();
-      });
+      // openInNewTab();
+    });
+
+    pop_under.addEventListener("click", function (e) {
+      e.preventDefault();
+      openInNewTab();
+    });
+
+    pop_under_cancel.addEventListener("click", function (e) {
+      e.preventDefault();
+      location.href = "https://zappian.com";
+    });
+
+    function openInNewTab() {
+      window.onbeforeunload = null;
+      var newTab = "https://zappian.com";
+      var win = window.open(newTab, "_blank");
+      // open offer in new tab
+      win.focus();
+      // redirect current page to t2 after offer clicked
+      setTimeout(function () {
+        location.href = "https://rightfullabs.com";
+      }, 130);
+    }
   </script>
 </html>
